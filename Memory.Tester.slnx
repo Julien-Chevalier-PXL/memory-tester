@@ -1,2 +1,14 @@
 <Solution>
+  <Folder Name="/src/" />
+  <Folder Name="/src/Common/">
+    <Project Path="src/Memory.Tester.Common/Memory.Tester.Common.csproj" />
+  </Folder>
+  <Folder Name="/src/Core/">
+    <Project Path="src/Memory.Tester.Core.Business/Memory.Tester.Core.Business.csproj" />
+    <Project Path="src/Memory.Tester.Core.Data/Memory.Tester.Core.Data.csproj" />
+  </Folder>
+  <Folder Name="/src/Web/">
+    <Project Path="src/Memory.Tester.Maui/Memory.Tester.Maui.csproj" />
+    <Project Path="src/Memory.Tester.Web.Service/Memory.Tester.Web.Service.csproj" />
+  </Folder>
 </Solution>
