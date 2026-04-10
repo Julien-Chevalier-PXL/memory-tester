@@ -1,4 +1,4 @@
-﻿namespace Memory.Tester.Core.Data.Entities.Abstractions;
+namespace Memory.Tester.Core.Data.Entities.Abstractions;
 
 /// <summary>
 /// Abstract class representing an entity.
@@ -8,5 +8,5 @@ public abstract class AEntity
     /// <summary>
     /// Gets or sets the unique identifier for the entity.
     /// </summary>
-    public int Id { get; set; }
+    public Guid Id { get; set; }
 }
