@@ -1,4 +1,7 @@
 <Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+  </Folder>
   <Folder Name="/src/" />
   <Folder Name="/src/Common/">
     <Project Path="src/Memory.Tester.Common/Memory.Tester.Common.csproj" />
