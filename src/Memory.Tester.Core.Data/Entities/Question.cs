@@ -1,4 +1,4 @@
-﻿namespace Memory.Tester.Core.Data.Entities;
+namespace Memory.Tester.Core.Data.Entities;
 
 using Memory.Tester.Core.Data.Entities.Abstractions;
 
