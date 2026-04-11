@@ -1,5 +1,7 @@
 namespace Memory.Tester.Maui;
 
+using Memory.Tester.Web.Service;
+
 using Microsoft.Extensions.Logging;
 using Microsoft.FluentUI.AspNetCore.Components;
 
@@ -21,6 +23,8 @@ public static class MauiProgram
         builder.Services.AddBlazorWebViewDeveloperTools();
         builder.Logging.AddDebug();
 #endif
+
+        builder.Services.AddWebServices();
 
         builder.Services.AddHttpClient();
         builder.Services.AddFluentUIComponents();

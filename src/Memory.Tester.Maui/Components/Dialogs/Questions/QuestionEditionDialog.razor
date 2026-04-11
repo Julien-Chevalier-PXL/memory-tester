@@ -1,0 +1,24 @@
+@using Memory.Tester.Maui.Components.Pages.Questions.ViewModels
+
+@implements IDialogContentComponent<QuestionViewModel>
+
+<FluentDialogHeader>
+    @if (this.Content.Id == default)
+    {
+        <span>Ajouter une question</span>
+    }
+    else
+    {
+        <span>Modifier la question</span>
+    }
+</FluentDialogHeader>
+
+<FluentDialogBody>
+    <FluentTextField Label="Intitulé" @bind-Value="this.Content.Title" />
+    <FluentTextField Label="Réponse" @bind-Value="@this.Content.Answer" />
+</FluentDialogBody>
+
+<FluentDialogFooter>
+    <FluentButton OnClick="this.CancelAsync" IconEnd="@(new Icons.Regular.Size16.Dismiss())">Annuler</FluentButton>
+    <FluentButton OnClick="this.SaveAsync" IconEnd="@(new Icons.Regular.Size16.Save())">Enregistrer</FluentButton>
+</FluentDialogFooter>

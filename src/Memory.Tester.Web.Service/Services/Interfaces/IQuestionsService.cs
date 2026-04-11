@@ -16,14 +16,14 @@ public interface IQuestionsService
     /// </summary>
     /// <param name="pageableQuery">The query used to paginate and filter.</param>
     /// <returns>A <see cref="ServiceResult{TResult}"/> containing a page of questions.</returns>
-    ServiceResult<PageResult<QuestionView>> SearchQuestions(PageableQuery pageableQuery);
+    Task<ServiceResult<PageResult<QuestionView>>> SearchQuestionsAsync(PageableQuery pageableQuery);
 
     /// <summary>
     /// Method to create a question.
     /// </summary>
     /// <param name="questionCreationModel">The model to create a question.</param>
     /// <returns>A <see cref="ServiceResult{TResult}"/> containing the id of the created question.</returns>
-    ServiceResult<Guid> CreateQuestion(QuestionCreationRequest questionCreationModel);
+    Task<ServiceResult<Guid>> CreateQuestionAsync(QuestionCreationRequest questionCreationModel);
 
     /// <summary>
     /// Method to update a question.
@@ -31,12 +31,12 @@ public interface IQuestionsService
     /// <param name="id">The id of the question.</param>
     /// <param name="updateQuestionModel">The model to update the question.</param>
     /// <returns>A <see cref="ServiceResult"/> representing the result of the operation.</returns>
-    ServiceResult UpdateQuestion(Guid id, QuestionUpdateRequest updateQuestionModel);
+    Task<ServiceResult> UpdateQuestionAsync(Guid id, QuestionUpdateRequest updateQuestionModel);
 
     /// <summary>
     /// Method to delete a question.
     /// </summary>
     /// <param name="id">The id of the question.</param>
     /// <returns>A <see cref="ServiceResult"/> representing the result of the operation.</returns>
-    ServiceResult DeleteQuestion(Guid id);
+    Task<ServiceResult> DeleteQuestionAsync(Guid id);
 }

@@ -1,0 +1,17 @@
+@using Memory.Tester.Maui.Components.Pages.Questions.ViewModels
+
+@implements IDialogContentComponent<QuestionViewModel>
+
+<FluentDialogHeader>
+    <span>Êtes-vous sûr de vouloir supprimer la question ?</span>
+</FluentDialogHeader>
+
+<FluentDialogBody>
+    <FluentTextField ReadOnly="true" Label="Intitulé" @bind-Value="this.Content.Title" />
+    <FluentTextField ReadOnly="true" Label="Réponse" @bind-Value="@this.Content.Answer" />
+</FluentDialogBody>
+
+<FluentDialogFooter>
+    <FluentButton OnClick="this.CancelAsync" IconEnd="@(new Icons.Regular.Size16.Dismiss())">Annuler</FluentButton>
+    <FluentButton OnClick="this.DeleteAsync" IconEnd="@(new Icons.Regular.Size16.Delete())">Supprimer</FluentButton>
+</FluentDialogFooter>

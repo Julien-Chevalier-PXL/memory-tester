@@ -24,30 +24,54 @@ internal sealed class QuestionsService : IQuestionsService
     }
 
     /// <inheritdoc />
-    public ServiceResult<PageResult<QuestionView>> SearchQuestions(PageableQuery pageableQuery)
+    public Task<ServiceResult<PageResult<QuestionView>>> SearchQuestionsAsync(PageableQuery pageableQuery)
     {
-        var businessResult = this._questionBusiness.SearchQuestions(pageableQuery);
-        return new ServiceResult<PageResult<QuestionView>> { IsSuccess = businessResult.IsSuccess, Result = businessResult.Result?.SelectItems(QuestionView.FromModel), ErrorMessage = businessResult.ErrorMessage };
+        var task = new Task<ServiceResult<PageResult<QuestionView>>>(() =>
+        {
+            var businessResult = this._questionBusiness.SearchQuestions(pageableQuery);
+            return new ServiceResult<PageResult<QuestionView>> { IsSuccess = businessResult.IsSuccess, Result = businessResult.Result?.SelectItems(QuestionView.FromModel), ErrorMessage = businessResult.ErrorMessage };
+        });
+        task.Start();
+
+        return task;
     }
 
     /// <inheritdoc />
-    public ServiceResult<Guid> CreateQuestion(QuestionCreationRequest questionCreationModel)
+    public Task<ServiceResult<Guid>> CreateQuestionAsync(QuestionCreationRequest questionCreationModel)
     {
-        var businessResult = this._questionBusiness.CreateQuestion(questionCreationModel.ToModel());
-        return new ServiceResult<Guid> { IsSuccess = businessResult.IsSuccess, Result = businessResult.Result, ErrorMessage = businessResult.ErrorMessage };
+        var task = new Task<ServiceResult<Guid>>(() =>
+        {
+            var businessResult = this._questionBusiness.CreateQuestion(questionCreationModel.ToModel());
+            return new ServiceResult<Guid> { IsSuccess = businessResult.IsSuccess, Result = businessResult.Result, ErrorMessage = businessResult.ErrorMessage };
+        });
+
+        task.Start();
+        return task;
     }
 
     /// <inheritdoc />
-    public ServiceResult UpdateQuestion(Guid id, QuestionUpdateRequest updateQuestionModel)
+    public Task<ServiceResult> UpdateQuestionAsync(Guid id, QuestionUpdateRequest updateQuestionModel)
     {
-        var businessResult = this._questionBusiness.UpdateQuestion(id, updateQuestionModel.ToModel());
-        return new ServiceResult { IsSuccess = businessResult.IsSuccess, ErrorMessage = businessResult.ErrorMessage };
+        var task = new Task<ServiceResult>(() =>
+        {
+            var businessResult = this._questionBusiness.UpdateQuestion(id, updateQuestionModel.ToModel());
+            return new ServiceResult { IsSuccess = businessResult.IsSuccess, ErrorMessage = businessResult.ErrorMessage };
+        });
+
+        task.Start();
+        return task;
     }
 
     /// <inheritdoc />
-    public ServiceResult DeleteQuestion(Guid id)
+    public Task<ServiceResult> DeleteQuestionAsync(Guid id)
     {
-        var businessResult = this._questionBusiness.DeleteQuestion(id);
-        return new ServiceResult { IsSuccess = businessResult.IsSuccess, ErrorMessage = businessResult.ErrorMessage };
+        var task = new Task<ServiceResult>(() =>
+        {
+            var businessResult = this._questionBusiness.DeleteQuestion(id);
+            return new ServiceResult { IsSuccess = businessResult.IsSuccess, ErrorMessage = businessResult.ErrorMessage };
+        });
+
+        task.Start();
+        return task;
     }
 }

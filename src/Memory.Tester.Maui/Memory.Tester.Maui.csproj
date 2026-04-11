@@ -73,4 +73,8 @@
         <PackageReference Include="Microsoft.FluentUI.AspNetCore.Components.Icons" Version="4.14.0" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Memory.Tester.Web.Service\Memory.Tester.Web.Service.csproj" />
+    </ItemGroup>
+
 </Project>
