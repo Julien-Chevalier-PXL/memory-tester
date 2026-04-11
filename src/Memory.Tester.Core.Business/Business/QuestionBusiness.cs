@@ -30,18 +30,18 @@ internal sealed class QuestionBusiness : IQuestionBusiness
         try
         {
             var questionsPage = this._questionAccessLayer.GetCollectionPage(
-                pageableQuery, 
+                pageableQuery,
                 q => new QuestionViewModel
                 {
                     Id = q.Id,
                     Title = q.Title,
                     Answer = q.Answer,
                 });
-            return new() { IsSuccess = true, Result = questionsPage };
+            return BusinessResult<PageResult<QuestionViewModel>>.Success(questionsPage);
         }
         catch (Exception ex)
         {
-            return new() { IsSuccess = false, ErrorMessage = ex.Message };
+            return BusinessResult<PageResult<QuestionViewModel>>.Error(ex.Message);
         }
     }
 
@@ -56,11 +56,11 @@ internal sealed class QuestionBusiness : IQuestionBusiness
                 Answer = questionCreationModel.Answer
             };
             this._questionAccessLayer.Add(questionToCreate);
-            return new() { IsSuccess = true, Result = questionToCreate.Id };
+            return BusinessResult<Guid>.Success(questionToCreate.Id);
         }
         catch (Exception ex)
         {
-            return new() { IsSuccess = false, ErrorMessage = ex.Message };
+            return BusinessResult<Guid>.Error(ex.Message);
         }
     }
 
@@ -71,18 +71,18 @@ internal sealed class QuestionBusiness : IQuestionBusiness
         {
             var questionToDelete = this._questionAccessLayer.GetById(id);
             if (questionToDelete is null)
-                return new BusinessResult { IsSuccess = false, ErrorMessage = "Question not found" };
+                return BusinessResult.Error("Question not found");
 
             questionToDelete.Title = updateQuestionModel.Title;
             questionToDelete.Answer = updateQuestionModel.Answer;
 
             this._questionAccessLayer.Update(questionToDelete);
 
-            return new BusinessResult { IsSuccess = true };
+            return BusinessResult.Success();
         }
         catch (Exception ex)
         {
-            return new BusinessResult { IsSuccess = false, ErrorMessage = ex.Message };
+            return BusinessResult.Error(ex.Message);
         }
     }
 
@@ -93,14 +93,14 @@ internal sealed class QuestionBusiness : IQuestionBusiness
         {
             var questionToDelete = this._questionAccessLayer.GetById(id);
             if (questionToDelete is null)
-                return new BusinessResult { IsSuccess = false, ErrorMessage = "Question not found" };
+                return BusinessResult.Error("Question not found");
 
             this._questionAccessLayer.Delete(questionToDelete);
-            return new BusinessResult { IsSuccess = true };
+            return BusinessResult.Success();
         }
         catch (Exception ex)
         {
-            return new BusinessResult { IsSuccess = false, ErrorMessage = ex.Message };
+            return BusinessResult.Error(ex.Message);
         }
     }
 }
