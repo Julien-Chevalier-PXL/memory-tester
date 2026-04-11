@@ -4,18 +4,30 @@
 
     .page ::deep .content {
         flex: 1;
+        height: 100%;
+        display: grid;
+        grid-template-areas: 'sidebar main';
+        grid-template-columns: auto 1fr;
+        grid-template-rows: 100%;
         box-shadow: inset 0px 0px 10px 5px rgba(0, 0, 0, 0.12), 0 calc(4 * 0.5px) calc((4 * 1px)) rgba(0, 0, 0, 0.14);
     }
 
         .page ::deep .content .sidebar {
             height: 100%;
+            grid-area: sidebar;
         }
 
         .page ::deep .content main {
             height: 100%;
             width: 100%;
-            padding: 1.5rem;
+            grid-area: main;
+            display: flex;
         }
+
+            .page ::deep .content main .memory-tester-page {
+                width: 100%;
+                padding: 1.5rem;
+            }
 
     .page ::deep .footer {
         height: 1rem;

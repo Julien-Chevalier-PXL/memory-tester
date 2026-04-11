@@ -1,0 +1,18 @@
+.memory-tester-page.questions-listing {
+    display: grid;
+    grid-template-areas: 'actions' 'questions-data-grid' 'questions-data-grid-pagination';
+    grid-template-rows: auto 1fr auto;
+    row-gap: 1rem;
+}
+
+    .questions-listing .actions {
+        grid-area: actions;
+    }
+
+    .questions-listing .questions-data-grid {
+        grid-area: questions-data-grid;
+    }
+
+    .questions-listing .questions-data-grid-pagination {
+        grid-area: questions-data-grid-pagination;
+    }

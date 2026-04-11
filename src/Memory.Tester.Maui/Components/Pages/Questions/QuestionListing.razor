@@ -2,30 +2,42 @@
 
 @using Memory.Tester.Maui.Components.Pages.Questions.ViewModels
 
-<FluentButton aria-label="Create question" IconEnd="@(new Icons.Regular.Size16.Add())" OnClick="@(async (_) => await this.EditQuestionAsync(new()).ConfigureAwait(true))" )">
-    Ajouter un question
-</FluentButton>
+<div class="memory-tester-page questions-listing">
+    <div class="actions">
+        <FluentButton aria-label="Create question"
+                      Appearance="Appearance.Accent"
+                      IconEnd="@(new Icons.Regular.Size20.Add())"
+                      OnClick="@(async (_) => await this.EditQuestionAsync(new()).ConfigureAwait(true))" )">
+            Ajouter un question
+        </FluentButton>
+    </div>
 
-<FluentDataGrid @ref="this._questionsDataGrid"
-                TGridItem="QuestionViewModel"
-                ItemKey="@(q => q.Id)"
-                ItemsProvider="this.LoadQuestions"
-                Pagination="this.pagination"
-                ShowHover="true">
-    <ChildContent>
-        <PropertyColumn Title="Intitulé" Property="@(q => q.Title)" />
-        <PropertyColumn Title="Réponse" Property="@(q => q.Answer)" />
-        <TemplateColumn Title="Actions" Align="@Align.End">
-            <FluentButton aria-label="Edit question" IconEnd="@(new Icons.Regular.Size16.Edit())" OnClick="@(async (_) => await this.EditQuestionAsync(context).ConfigureAwait(true))" />
-            <FluentButton aria-label="Delete question" IconEnd="@(new Icons.Regular.Size16.Delete())" OnClick="@(async (_) => await this.DeleteQuestionAsync(context).ConfigureAwait(true))" />
-        </TemplateColumn>
-    </ChildContent>
-    <ErrorContent>
-        <div class="error-content">
-            <span class="error-message">Une erreur est survenue lors du chargement des questions.</span>
-            <FluentButton OnClick="this.ReloadQuestionsAsync" IconEnd="@(new Icons.Regular.Size16.ArrowCounterclockwise())" />
-        </div>
-    </ErrorContent>
-</FluentDataGrid>
+    <div class="questions-data-grid">
+        <FluentDataGrid @ref="this._questionsDataGrid"
+                        TGridItem="QuestionViewModel"
+                        ItemKey="@(q => q.Id)"
+                        ItemsProvider="this.LoadQuestions"
+                        Pagination="this.pagination"
+                        ShowHover="true"
+                        GenerateHeader="@GenerateHeaderOption.Sticky">
+            <ChildContent>
+                <PropertyColumn Title="Intitulé" Property="@(q => q.Title)" />
+                <PropertyColumn Title="Réponse" Property="@(q => q.Answer)" />
+                <TemplateColumn Title="Actions" Align="@Align.End">
+                    <FluentButton aria-label="Edit question" IconEnd="@(new Icons.Regular.Size16.Edit())" OnClick="@(async (_) => await this.EditQuestionAsync(context).ConfigureAwait(true))" />
+                    <FluentButton aria-label="Delete question" IconEnd="@(new Icons.Regular.Size16.Delete())" OnClick="@(async (_) => await this.DeleteQuestionAsync(context).ConfigureAwait(true))" />
+                </TemplateColumn>
+            </ChildContent>
+            <ErrorContent>
+                <div class="error-content">
+                    <span class="error-message">Une erreur est survenue lors du chargement des questions.</span>
+                    <FluentButton OnClick="this.ReloadQuestionsAsync" IconEnd="@(new Icons.Regular.Size16.ArrowCounterclockwise())" />
+                </div>
+            </ErrorContent>
+        </FluentDataGrid>
+    </div>
 
-<FluentPaginator State="@this.pagination" />
+    <div class="questions-data-grid-pagination">
+        <FluentPaginator State="@this.pagination" />
+    </div>
+</div>
