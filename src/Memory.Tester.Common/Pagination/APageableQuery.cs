@@ -14,9 +14,9 @@ public class PageableQuery
     public bool IsPaginated { get; set; } = true;
 
     /// <summary>
-    /// Gets or sets the current page number.
+    /// Gets or sets the start index.
     /// </summary>
-    public int PageNumber { get; set; } = 1;
+    public int StartIndex { get; set; } = 0;
 
     /// <summary>
     /// Gets or sets the number of items to include on each page of results.

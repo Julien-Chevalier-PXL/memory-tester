@@ -43,7 +43,7 @@ public partial class QuestionListing
 
     private async ValueTask<GridItemsProviderResult<QuestionViewModel>> LoadQuestions(GridItemsProviderRequest<QuestionViewModel> req)
     {
-        var result = await this._questionsService.SearchQuestionsAsync(new() { IsPaginated = req.Count.HasValue, PageNumber = req.StartIndex, PageSize = req.Count.HasValue ? req.Count.Value : 10 }).ConfigureAwait(true);
+        var result = await this._questionsService.SearchQuestionsAsync(new() { IsPaginated = req.Count.HasValue, StartIndex = req.StartIndex, PageSize = req.Count.HasValue ? req.Count.Value : 10 }).ConfigureAwait(true);
         if (!result.IsSuccess)
         {
             this._toastService.ShowToast(ToastIntent.Error, $"Erreur lors de la récupération des questions: {result.ErrorMessage}");

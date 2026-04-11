@@ -31,7 +31,7 @@ public abstract class AFileAccessLayer<TEntity> : IAccessLayer<TEntity>
         if (pageableQuery.IsPaginated)
         {
             filesPathsEnumerable = filesPathsEnumerable
-                .Skip((pageableQuery.PageNumber - 1) * pageableQuery.PageSize)
+                .Skip(pageableQuery.StartIndex)
                 .Take(pageableQuery.PageSize);
         }
 
