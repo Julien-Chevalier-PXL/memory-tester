@@ -22,7 +22,7 @@ public abstract class AFileAccessLayer<TEntity> : IAccessLayer<TEntity>
     }
 
     /// <inheritdoc/>
-    public PageResult<TEntity> GetCollectionPage(PageableQuery pageableQuery)
+    public PageResult<TResult> GetCollectionPage<TResult>(PageableQuery pageableQuery, Func<TEntity, TResult> selector)
     {
         var entityFolder = GetEntityFolderPath();
         var allFilesPaths = Directory.GetFiles(entityFolder, "*.json");
@@ -39,9 +39,9 @@ public abstract class AFileAccessLayer<TEntity> : IAccessLayer<TEntity>
         if (entities.Any(static e => e is null))
             throw new InvalidDataException("One or more entities could not be deserialized.");
 
-        return new PageResult<TEntity>
+        return new PageResult<TResult>
         {
-            Items = [.. entities!],
+            Items = [.. entities.Cast<TEntity>().Select(selector)],
             TotalCount = allFilesPaths.Length,
         };
     }

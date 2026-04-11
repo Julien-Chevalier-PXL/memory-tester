@@ -22,8 +22,10 @@ public interface IAccessLayer<TEntity>
     /// Method to get a page of the entities.
     /// </summary>
     /// <param name="pageableQuery">The query to paginate the collection.</param>
+    /// <param name="selector">The selection function.</param>
     /// <returns>A page of entities.</returns>
-    PageResult<TEntity> GetCollectionPage(PageableQuery pageableQuery);
+    /// <typeparam name="TResult">The type of the result.</typeparam>
+    PageResult<TResult> GetCollectionPage<TResult>(PageableQuery pageableQuery, Func<TEntity, TResult> selector);
 
     /// <summary>
     /// Method to ceate a new entity.
