@@ -15,4 +15,14 @@ public class PageResult<TResult>
     /// Gets or sets the total number of items.
     /// </summary>
     public int TotalCount { get; set; }
+
+    /// <summary>
+    /// Method to create a new instance of <see cref="PageResult{TSelect}"/> with the items transformed by the provided
+    /// selector function.
+    /// </summary>
+    /// <typeparam name="TSelect">The type of the items in the resulting page.</typeparam>
+    /// <param name="selector">The select function.</param>
+    /// <returns>A new <see cref="PageResult{TSelect}"/> with the transformed items.</returns>
+    public PageResult<TSelect> SelectItems<TSelect>(Func<TResult, TSelect> selector)
+        => new() { TotalCount = this.TotalCount, Items = [.. this.Items.Select(selector)] } ;
 }
