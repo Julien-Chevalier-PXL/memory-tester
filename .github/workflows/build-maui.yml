@@ -1,0 +1,39 @@
+# This workflow will build a .NET project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
+
+name: Build MAUI
+
+on:
+  pull_request:
+
+env:
+  PROJECT_PATH: "src/Memory.Tester.Maui/Memory.Tester.Maui.csproj"
+  DOTNET_VERSION: "10.0.x"
+  WINUI_TFM: "net10.0-windows10.0.19041.0"
+
+jobs:
+  build-maui-windows:
+    runs-on: windows-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Setup .NET Core SDK
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: ${{env.DOTNET_VERSION}}
+
+    # For WinUI builds
+    - name: Add msbuild to PATH
+      uses: microsoft/setup-msbuild@v2
+
+    - name: Install MAUI workloads
+      run: dotnet workload install maui --source https://api.nuget.org/v3/index.json
+
+    - name: Restore NuGet packages
+      run: dotnet restore ${{env.PROJECT_PATH}}
+
+    - name: Build Maui WinUI project
+      run: dotnet build ${{env.PROJECT_PATH}} -c RE -f ${{env.WINUI_TFM}}
