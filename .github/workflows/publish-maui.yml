@@ -43,27 +43,14 @@ jobs:
         with:
           dotnet-version: ${{env.DOTNET_VERSION}}
 
-      - name: Publish MSIX
-        run: dotnet publish ${{env.CSPROJ_PATH}} -p:PublishProfile=MSIX-win-x64.pubxml -f ${{env.WINUI_TFM}}
-
       - name: Decode PFX certificate
         shell: pwsh
         run: |
           $bytes = [System.Convert]::FromBase64String("${{ secrets.PFX_FILE }}")
           Set-Content -Path signingCert.pfx -Value $bytes -AsByteStream
 
-      - name: Sign MSIX package
-        shell: pwsh
-        run: |
-          $msix = Get-ChildItem -Recurse -Filter *.msix | Select-Object -First 1
-          if (-not $msix) { throw "MSIX not found." }
-          & "C:\Program Files (x86)\Windows Kits\10\App Certification Kit\signtool.exe" sign `
-            /a `
-            /f signingCert.pfx `
-            /p "${{ secrets.PFX_PASSWORD }}" `
-            /fd SHA256 `
-            /v `
-            $msix.FullName
+      - name: Publish MSIX
+        run: dotnet publish ${{env.CSPROJ_PATH}} -f ${{env.WINUI_TFM}} -p:PublishProfile=MSIX-win-x64.pubxml -p:PackageCertificateKeyFile=signingCert.pfx -p:PackageCertificatePassword=${{ secrets.PFX_PASSWORD }}
 
       - name: Find MSIX output
         id: msix
