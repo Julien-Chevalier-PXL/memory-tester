@@ -30,10 +30,10 @@
         <MauiXamlInflator>SourceGen</MauiXamlInflator>
 
         <!-- Display name -->
-        <ApplicationTitle>Memory Tester</ApplicationTitle>
+        <ApplicationTitle>Memory Tester - Debug</ApplicationTitle>
 
         <!-- App Identifier -->
-        <ApplicationId>memory.tester</ApplicationId>
+        <ApplicationId>memory.tester.debug</ApplicationId>
 
         <!-- Versions -->
         <ApplicationDisplayVersion>0.1.0</ApplicationDisplayVersion>
@@ -44,11 +44,13 @@
 
         <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
         <TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
+        <AssemblyTitle>Memory Tester</AssemblyTitle>
+        <DefaultLanguage>fr-FR</DefaultLanguage>
     </PropertyGroup>
 
     <ItemGroup>
         <!-- App Icon -->
-        <MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
+        <MauiIcon Include="Resources\AppIcon\memory_tester.png" ForegroundFile="Resources\AppIcon\memory_tester.png" Color="#512BD4" />
 
         <!-- Splash Screen -->
         <MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
