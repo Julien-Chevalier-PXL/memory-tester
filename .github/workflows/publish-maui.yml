@@ -47,10 +47,10 @@ jobs:
         shell: pwsh
         run: |
           $bytes = [System.Convert]::FromBase64String("${{ secrets.PFX_FILE }}")
-          Set-Content -Path signingCert.pfx -Value $bytes -AsByteStream
+          Set-Content -Path C:\temp\signingCert.pfx -Value $bytes -AsByteStream
 
       - name: Publish MSIX
-        run: dotnet publish ${{env.CSPROJ_PATH}} -f ${{env.WINUI_TFM}} -p:PublishProfile=MSIX-win-x64.pubxml -p:PackageCertificateKeyFile=signingCert.pfx -p:PackageCertificatePassword=${{ secrets.PFX_PASSWORD }}
+        run: dotnet publish ${{env.CSPROJ_PATH}} -f ${{env.WINUI_TFM}} -p:PublishProfile=MSIX-win-x64.pubxml -p:PackageCertificateKeyFile=C:\temp\signingCert.pfx -p:PackageCertificatePassword=${{ secrets.PFX_PASSWORD }}
 
       - name: Find MSIX output
         id: msix
