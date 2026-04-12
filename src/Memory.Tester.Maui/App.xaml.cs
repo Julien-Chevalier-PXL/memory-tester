@@ -1,4 +1,4 @@
-﻿namespace Memory.Tester.Maui
+namespace Memory.Tester.Maui
 {
     public partial class App : Application
     {
@@ -9,7 +9,7 @@
 
         protected override Window CreateWindow(IActivationState? activationState)
         {
-            return new Window(new MainPage()) { Title = "Memory.Tester.Maui" };
+            return new Window(new MainPage()) { Title = "Memory Tester" };
         }
     }
 }

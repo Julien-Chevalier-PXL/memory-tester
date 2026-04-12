@@ -3,6 +3,14 @@
     "Windows Machine": {
       "commandName": "Project",
       "nativeDebugging": false
+    },
+    "MSIX": {
+      "commandName": "MsixPackage",
+      "commandLineArgs": "", /* Command line arguments to pass to the app. */
+      "alwaysReinstallApp": true, /* Uninstall and then reinstall the app. All information about the app state is deleted. */
+      "remoteDebugEnabled": false, /* Indicates that the debugger should attach to a process on a remote machine. */
+      "allowLocalNetworkLoopbackProperty": true, /* Allow the app to make network calls to the device it is installed on. */
+      "doNotLaunchApp": false, /* Do not launch the app, but debug my code when it starts. */
     }
   }
 }
