@@ -7,7 +7,11 @@ on:
         description: "Version number (e.g. 1.2.3)"
         required: true
         type: string
-
+env:
+  CSPROJ_PATH: "src/Memory.Tester.Maui/Memory.Tester.Maui.csproj"
+  DOTNET_VERSION: "10.0.x"
+  WINUI_TFM: "net10.0-windows10.0.19041.0"
+  
 jobs:
   build:
     runs-on: windows-latest
@@ -15,6 +19,16 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      # For WinUI builds
+      - name: Add msbuild to PATH
+        uses: microsoft/setup-msbuild@v2
+
+      - name: Install MAUI workloads
+        run: dotnet workload install maui --source https://api.nuget.org/v3/index.json
+
+      - name: Restore NuGet packages
+        run: dotnet restore ${{env.CSPROJ_PATH}}
 
       - name: Update MAUI manifest version
         shell: pwsh
@@ -27,10 +41,10 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: "10.0.x"
+          dotnet-version: ${{env.DOTNET_VERSION}}
 
       - name: Publish MSIX
-        run: dotnet publish src/Memmory.Tester.Maui/Memmory.Tester.Maui.csproj -p:PublishProfile=MSIX-win-x64.pubxml -f net10.0-windows10.0.19041
+        run: dotnet publish ${{env.CSPROJ_PATH}} -p:PublishProfile=MSIX-win-x64.pubxml -f ${{env.WINUI_TFM}}
 
       - name: Find MSIX output
         id: msix
