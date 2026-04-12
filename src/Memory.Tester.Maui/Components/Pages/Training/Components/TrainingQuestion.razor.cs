@@ -29,7 +29,7 @@ public partial class TrainingQuestion
 
     private void ValidateAnswer()
     {
-        this.isAnswerCorrect = string.Equals(this.answer, this.Question.ExpectedAnswer, StringComparison.OrdinalIgnoreCase);
+        this.isAnswerCorrect = string.Equals(this.answer, this.Question.Answer, StringComparison.OrdinalIgnoreCase);
     }
 
     private void Surrender()

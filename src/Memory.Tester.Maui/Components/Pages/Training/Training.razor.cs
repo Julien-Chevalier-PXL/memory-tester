@@ -76,7 +76,6 @@ public partial class Training
                 Id = currentQuestion.Id,
                 Title = currentQuestion.Title,
                 Answer = currentQuestion.Answer,
-                IsTitleShown = Random.Shared.Next(2) == 0, // Randomly decide to show the title or not
             };
         }
     }

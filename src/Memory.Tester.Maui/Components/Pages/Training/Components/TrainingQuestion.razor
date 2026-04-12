@@ -1,6 +1,6 @@
 <div class="training-question">
     <FluentCard>
-        <FluentTextField ReadOnly="true" Label="Intitulé" Value="@this.Question.DisplayedText" />
+        <FluentTextField ReadOnly="true" Label="Intitulé" Value="@this.Question.Title" />
         <FluentTextField Disabled="this.IsQuestionEnded" Label="Réponse" @bind-Value="@this.answer" />
 
         <div class="expected-answer">
@@ -25,7 +25,7 @@
                     <p>
                         <FluentEmoji Value="@(new Emojis.SmileysEmotion.Color.Default.SlightlyFrowningFace())" />
                     </p>
-                    <span>La bonne réponse était: @this.Question.ExpectedAnswer</span>
+                    <span>La bonne réponse était: @this.Question.Answer</span>
                 }
                 else
                 {
