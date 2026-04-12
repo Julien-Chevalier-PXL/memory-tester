@@ -1,0 +1,50 @@
+name: Publish MAUI
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version number (e.g. 1.2.3)"
+        required: true
+        type: string
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Update MAUI manifest version
+        shell: pwsh
+        run: |
+          $manifestPath = "src/Memmory.Tester.Maui/Platforms/Windows/Package.appxmanifest"
+          [xml]$xml = Get-Content $manifestPath
+          $xml.Package.Identity.Version = "${{ github.event.inputs.version }}.0"
+          $xml.Save($manifestPath)
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "10.0.x"
+
+      - name: Publish MSIX
+        run: dotnet publish src/Memmory.Tester.Maui/Memmory.Tester.Maui.csproj -p:PublishProfile=MSIX-win-x64.pubxml -f net10.0-windows10.0.19041
+
+      - name: Find MSIX output
+        id: msix
+        shell: pwsh
+        run: |
+          $file = Get-ChildItem -Recurse -Filter *.msix | Select-Object -First 1
+          if (-not $file) { throw "No MSIX file found." }
+          echo "path=$($file.FullName)" >> $env:GITHUB_OUTPUT
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: "v${{ github.event.inputs.version }}"
+          name: "Release v${{ github.event.inputs.version }}"
+          files: ${{ steps.msix.outputs.path }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
