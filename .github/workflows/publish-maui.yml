@@ -33,7 +33,7 @@ jobs:
       - name: Update MAUI manifest version
         shell: pwsh
         run: |
-          $manifestPath = "src/Memmory.Tester.Maui/Platforms/Windows/Package.appxmanifest"
+          $manifestPath = "src/Memory.Tester.Maui/Platforms/Windows/Package.appxmanifest"
           [xml]$xml = Get-Content $manifestPath
           $xml.Package.Identity.Version = "${{ github.event.inputs.version }}.0"
           $xml.Save($manifestPath)
