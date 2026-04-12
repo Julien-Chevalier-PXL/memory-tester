@@ -1,0 +1,29 @@
+.training-question {
+    min-width: 500px;
+    min-height: 350px;
+    width: 75%;
+}
+
+    .training-question ::deep fluent-card {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+        .training-question ::deep fluent-card .training-question-actions {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+        }
+
+        .training-question ::deep fluent-card fluent-text-field {
+            width: 100%;
+        }
+
+        .training-question ::deep fluent-card .answer-result {
+            display: flex;
+            justify-content: center;
+            align-content: center;
+            align-items: center;
+            font-weight: bold;
+        }

@@ -1,0 +1,39 @@
+<div class="training-question">
+    <FluentCard>
+        <FluentTextField ReadOnly="true" Label="Intitulé" Value="@this.Question.DisplayedText" />
+        <FluentTextField Disabled="this.IsQuestionEnded" Label="Réponse" @bind-Value="@this.answer" />
+
+        <div class="expected-answer">
+        </div>
+
+        <div class="training-question-actions">
+            <FluentButton OnClick="this.Surrender" Disabled="this.IsQuestionEnded">Abandonner</FluentButton>
+            <FluentButton OnClick="this.ValidateAnswer" Disabled="this.IsQuestionEnded" IconEnd="@(new Icons.Regular.Size16.Checkmark())" Appearance="Appearance.Accent">Valider</FluentButton>
+        </div>
+        
+        @if (this.isAnswerCorrect.HasValue)
+        {
+            <div class="answer-result">
+                @if (this.isAnswerCorrect.Value)
+                {
+                    <p>
+                        <FluentEmoji Value="@(new Emojis.Symbols.Color.Default.CheckMarkButton())" /> Bonne réponse ! <FluentEmoji Value="@(new Emojis.PeopleBody.Color.Default.ThumbsUp())" />
+                    </p>
+                }
+                else if (this.isAnswerShown)
+                {
+                    <p>
+                        <FluentEmoji Value="@(new Emojis.SmileysEmotion.Color.Default.SlightlyFrowningFace())" />
+                    </p>
+                    <span>La bonne réponse était: @this.Question.ExpectedAnswer</span>
+                }
+                else
+                {
+                    <p>
+                        <FluentEmoji Value="@(new Emojis.Symbols.Color.Default.CrossMark())" /> Mauvaise réponse !
+                    </p>
+                }
+            </div>
+        }
+    </FluentCard>
+</div>

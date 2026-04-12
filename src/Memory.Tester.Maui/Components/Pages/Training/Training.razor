@@ -1,0 +1,37 @@
+@page "/training"
+
+@using Memory.Tester.Maui.Components.Pages.Training.Components
+
+<div class="memory-tester-page training">
+    <FluentOverlay @bind-Visible=@this.isLoading
+                   Transparent="false"
+                   Alignment="Align.Center"
+                   Justification="JustifyContent.Center">
+        <FluentProgressRing />
+    </FluentOverlay>
+
+    <h1><FluentEmoji Value="@(new Emojis.PeopleBody.Color.Default.Brain())" /> Entrainement</h1>
+    @if (this.isTrainingStarted)
+    {
+        @if (this._questions.Count == 0)
+        {
+            <FluentMessageBar Class="message-bar">
+                C'est la dernière question, l'entrainement sera ensuite terminé ! Vous pouvez recommencer en cliquant sur le bouton "Recommencer l'entrainement".
+            </FluentMessageBar>
+        }
+        @if (this._currentTrainingQuestion is not null)
+        {
+            <TrainingQuestion @ref="this.trainingQuestion" Question="this._currentTrainingQuestion" />
+        }
+
+        <div class="training-session-actions">
+            <FluentButton OnClick="this.Restart">Recommencer l'entrainement</FluentButton>
+
+            <FluentButton Appearance="Appearance.Accent" OnClick="this.NextQuestion" Disabled="@(this._questions.Count == 0)">Question suivante</FluentButton>
+        </div>
+    }
+    else
+    {
+        <FluentButton Appearance="Appearance.Accent" OnClick="this.StartTraining">Commencer</FluentButton>
+    }
+</div>

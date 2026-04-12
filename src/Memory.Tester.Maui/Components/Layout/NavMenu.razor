@@ -1,6 +1,7 @@
 <div class="nav-menu">
     <FluentNavMenu @bind-Expanded="@expanded" Width="250" Collapsible="true" Title="Memory tester" >
         <FluentNavLink Href="/" Match="NavLinkMatch.All" Icon="@(new Icons.Regular.Size48.Home())" Tooltip="Accueil">Accueil</FluentNavLink>
+        <FluentNavLink Href="/training" Match="NavLinkMatch.Prefix" Icon="@(new Icons.Regular.Size48.Brain())" Tooltip="Entrainement">Entrainement</FluentNavLink>
         <FluentNavLink Href="/questions" Match="NavLinkMatch.Prefix" Icon="@(new Icons.Regular.Size48.Question())" Tooltip="Questions">Questions</FluentNavLink>
     </FluentNavMenu>
 </div>
