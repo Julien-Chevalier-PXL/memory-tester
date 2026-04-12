@@ -1,0 +1,9 @@
+.question-edition-dialog ::deep fluent-text-field {
+    width: 100%;
+}
+
+.question-edition-dialog ::deep .footer {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}

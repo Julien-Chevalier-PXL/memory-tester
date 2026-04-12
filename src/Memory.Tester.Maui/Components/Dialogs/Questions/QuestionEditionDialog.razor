@@ -2,23 +2,27 @@
 
 @implements IDialogContentComponent<QuestionViewModel>
 
-<FluentDialogHeader>
-    @if (this.Content.Id == default)
-    {
-        <span>Ajouter une question</span>
-    }
-    else
-    {
-        <span>Modifier la question</span>
-    }
-</FluentDialogHeader>
+<div class="question-edition-dialog">
+    <FluentDialogHeader>
+        @if (this.Content.Id == default)
+        {
+            <span>Ajouter une question</span>
+        }
+        else
+        {
+            <span>Modifier la question</span>
+        }
+    </FluentDialogHeader>
 
-<FluentDialogBody>
-    <FluentTextField Label="Intitulé" @bind-Value="this.Content.Title" />
-    <FluentTextField Label="Réponse" @bind-Value="@this.Content.Answer" />
-</FluentDialogBody>
+    <FluentDialogBody>
+        <FluentTextField Label="Intitulé" @bind-Value="this.Content.Title" />
+        <FluentTextField Label="Réponse" @bind-Value="@this.Content.Answer" />
+    </FluentDialogBody>
 
-<FluentDialogFooter>
-    <FluentButton OnClick="this.CancelAsync" IconEnd="@(new Icons.Regular.Size16.Dismiss())">Annuler</FluentButton>
-    <FluentButton OnClick="this.SaveAsync" IconEnd="@(new Icons.Regular.Size16.Save())" Appearance="Appearance.Accent">Enregistrer</FluentButton>
-</FluentDialogFooter>
+    <FluentDialogFooter>
+        <div class="footer">
+            <FluentButton OnClick="this.CancelAsync" IconEnd="@(new Icons.Regular.Size16.Dismiss())">Annuler</FluentButton>
+            <FluentButton OnClick="this.SaveAsync" IconEnd="@(new Icons.Regular.Size16.Save())" Appearance="Appearance.Accent">Enregistrer</FluentButton>
+        </div>
+    </FluentDialogFooter>
+</div>
