@@ -9,7 +9,6 @@ on:
 
 env:
   PROJECT_PATH: "src/Memory.Tester.Maui/Memory.Tester.Maui.csproj"
-  NUGETCONFIG_PATH: "src/NuGet.Config"
   DOTNET_VERSION: "10.0.x"
   WINUI_TFM: "net10.0-windows10.0.19041.0"
 
@@ -35,7 +34,7 @@ jobs:
       run: dotnet workload install maui --source https://api.nuget.org/v3/index.json
 
     - name: Restore NuGet packages
-      run: dotnet restore ${{env.PROJECT_PATH}} --configfile ${{env.NUGETCONFIG_PATH}}
+      run: dotnet restore ${{env.PROJECT_PATH}}
 
     - name: Build Maui WinUI project
       run: dotnet build ${{env.PROJECT_PATH}} -c RE -f ${{env.WINUI_TFM}}
